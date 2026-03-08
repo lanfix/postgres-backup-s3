@@ -9,7 +9,7 @@ This is a fork of [karser/postgres-backup-s3](https://github.com/karser/docker-i
 
 Docker:
 ```sh
-$ docker run -e S3_ENDPOINT=minio:9000 -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e POSTGRES_DATABASE=dbname -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_HOST=localhost -e SCHEDULE="@daily" lanfix/postgres-backup-s3:1.3.0-pg18
+$ docker run -e S3_ENDPOINT=http://minio:9000 -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e POSTGRES_DATABASE=dbname -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_HOST=localhost -e SCHEDULE="@daily" lanfix/postgres-backup-s3:1.3.0-pg18
 ```
 
 Docker Compose:
@@ -28,8 +28,9 @@ postgres-backup:
     test: curl http://localhost:1880
 
   environment:
+    # NOTE: If variable SCHEDULE is not set, entrypoint runs backup.sh immediately!
     SCHEDULE: 0 30 */2 * * * *  # every 2 hours at HH:30
-    S3_ENDPOINT: minio:9000
+    S3_ENDPOINT: http://minio:9000
     S3_REGION: region
     S3_ACCESS_KEY_ID: key
     S3_SECRET_ACCESS_KEY: secret

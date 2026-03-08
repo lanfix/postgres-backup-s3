@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 # shellcheck disable=SC3040  # expecting 'pipefail' derrictive is availabe in the shell
 # shellcheck disable=SC2086  # POSTGRES_HOST_OPTS and AWS_ARGS should be splitted by spaces intentionally
@@ -6,27 +6,27 @@
 set -e
 set -o pipefail
 
-if [ "${S3_ACCESS_KEY_ID}" = "**None**" ]; then
+if [ -z "${S3_ACCESS_KEY_ID}" ]; then
   echo "You need to set the S3_ACCESS_KEY_ID environment variable."
   exit 1
 fi
 
-if [ "${S3_SECRET_ACCESS_KEY}" = "**None**" ]; then
+if [ -z "${S3_SECRET_ACCESS_KEY}" ]; then
   echo "You need to set the S3_SECRET_ACCESS_KEY environment variable."
   exit 1
 fi
 
-if [ "${S3_BUCKET}" = "**None**" ]; then
+if [ -z "${S3_BUCKET}" ]; then
   echo "You need to set the S3_BUCKET environment variable."
   exit 1
 fi
 
-if [ "${POSTGRES_DATABASE}" = "**None**" ]; then
+if [ -z "${POSTGRES_DATABASE}" ]; then
   echo "You need to set the POSTGRES_DATABASE environment variable."
   exit 1
 fi
 
-if [ "${POSTGRES_HOST}" = "**None**" ]; then
+if [ -z "${POSTGRES_HOST}" ]; then
   if [ -n "${POSTGRES_PORT_5432_TCP_ADDR}" ]; then
     POSTGRES_HOST="${POSTGRES_PORT_5432_TCP_ADDR}"
     POSTGRES_PORT="${POSTGRES_PORT_5432_TCP_PORT}"
@@ -36,17 +36,17 @@ if [ "${POSTGRES_HOST}" = "**None**" ]; then
   fi
 fi
 
-if [ "${POSTGRES_USER}" = "**None**" ]; then
+if [ -z "${POSTGRES_USER}" ]; then
   echo "You need to set the POSTGRES_USER environment variable."
   exit 1
 fi
 
-if [ "${POSTGRES_PASSWORD}" = "**None**" ]; then
+if [ -z "${POSTGRES_PASSWORD}" ]; then
   echo "You need to set the POSTGRES_PASSWORD environment variable or link to a container named POSTGRES."
   exit 1
 fi
 
-if [ "${S3_ENDPOINT}" = "**None**" ]; then
+if [ -z "${S3_ENDPOINT}" ]; then
   AWS_ARGS=""
 else
   AWS_ARGS="--endpoint-url ${S3_ENDPOINT}"
@@ -72,7 +72,7 @@ echo "DB backup uploaded successfully"
 
 rm db.dump
 
-if [ ! "${SUCCESS_WEBHOOK}" = "**None**" ]; then
+if [ -n "${SUCCESS_WEBHOOK}" ]; then
     echo "Notifying ${SUCCESS_WEBHOOK}"
     curl -m 10 --retry 5 "${SUCCESS_WEBHOOK}"
 fi

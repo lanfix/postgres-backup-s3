@@ -3,7 +3,7 @@ FROM alpine:3.23.3
 ARG POSTGRES_VERSION=18
 
 RUN apk update \
-    && apk --no-cache add dumb-init postgresql${POSTGRES_VERSION}-client curl aws-cli supercronic
+    && apk --no-cache add bash dumb-init postgresql${POSTGRES_VERSION}-client curl aws-cli supercronic
 
 ENV POSTGRES_DATABASE=**None**
 ENV POSTGRES_HOST=**None**
@@ -21,8 +21,8 @@ ENV S3_S3V4=no
 ENV SCHEDULE=**None**
 ENV SUCCESS_WEBHOOK=**None**
 
-ADD entrypoint.sh .
-ADD backup.sh .
+COPY --chmod=0775 entrypoint.sh .
+COPY --chmod=0775 backup.sh .
 
 HEALTHCHECK CMD curl --fail http://localhost:9746/health || exit 1
 
