@@ -1,5 +1,5 @@
 # postgres-backup-s3
-[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/f213/postgres-backup-s3?sort=semver)](https://hub.docker.com/r/f213/postgres-backup-s3) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/f213/postgres-backup-s3/latest)  ![Docker Pulls](https://img.shields.io/docker/pulls/f213/postgres-backup-s3)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/lanfix/postgres-backup-s3?sort=semver)](https://hub.docker.com/r/lanfix/postgres-backup-s3) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/lanfix/postgres-backup-s3/latest)  ![Docker Pulls](https://img.shields.io/docker/pulls/lanfix/postgres-backup-s3)
 
 Backup PostgresSQL to S3 (supports periodic backups)
 
@@ -9,7 +9,7 @@ This is a fork of [karser/postgres-backup-s3](https://github.com/karser/docker-i
 
 Docker:
 ```sh
-$ docker run -e S3_ENDPOINT=minio:9000 -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e POSTGRES_DATABASE=dbname -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_HOST=localhost -e SCHEDULE="@daily" f213/postgres-backup-s3:1.3.0-pg16
+$ docker run -e S3_ENDPOINT=minio:9000 -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e POSTGRES_DATABASE=dbname -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_HOST=localhost -e SCHEDULE="@daily" lanfix/postgres-backup-s3:1.3.0-pg18
 ```
 
 Docker Compose:
@@ -21,7 +21,7 @@ postgres:
     POSTGRES_PASSWORD: password
 
 postgres-backup:
-  image: f213/postgres-backup-s3
+  image: lanfix/postgres-backup-s3
   links:
     - postgres
   healthcheck:
