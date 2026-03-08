@@ -1,5 +1,4 @@
-FROM alpine:3.22.1
-LABEL maintainer="Fedor Borshev <fedor@borshev.com>"
+FROM alpine:3.23.3
 
 ARG POSTGRES_VERSION=18
 
