@@ -45,7 +45,7 @@ postgres-backup:
 
 ### Choose the right version
 
-We publish multiple builds targeting specific PostgreSQL versions (now its 15, 16, 17 and 18). While you can always use the latest version, it's recommended to choose the build that matches your server's PostgreSQL version. This prevents compatibility issues where you might create a backup that can't be restored on your current server. For example, if you're running PostgreSQL 15, use tag `1.3.0-pg15` instead of `1.3.0` or `latest`.
+We publish multiple builds targeting specific PostgreSQL versions (now its 16, 17 and 18). While you can always use the latest version, it's recommended to choose the build that matches your server's PostgreSQL version. This prevents compatibility issues where you might create a backup that can't be restored on your current server. For example, if you're running PostgreSQL 18, use tag `1.4.0-pg18` instead of `1.4.0` or `latest`.
 
 ### Crontab format
 

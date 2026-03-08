@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        postgres_version: [15, 16, 17, 18]
+        postgres_version: [16, 17, 18]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
